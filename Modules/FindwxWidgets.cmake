@@ -163,16 +163,6 @@ set(wxWidgets_LIBRARIES    "")
 set(wxWidgets_LIBRARY_DIRS "")
 set(wxWidgets_CXX_FLAGS    "")
 
-# DEPRECATED: This is a patch to support the DEPRECATED use of
-# wxWidgets_USE_LIBS.
-#
-# If wxWidgets_USE_LIBS is set:
-# - if using <components>, then override wxWidgets_USE_LIBS
-# - else set wxWidgets_FIND_COMPONENTS to wxWidgets_USE_LIBS
-if(wxWidgets_USE_LIBS AND NOT wxWidgets_FIND_COMPONENTS)
-  set(wxWidgets_FIND_COMPONENTS ${wxWidgets_USE_LIBS})
-endif()
-
 # Add the convenience use file if available.
 #
 # Get dir of this file which may reside in:
@@ -205,15 +195,6 @@ endif()
 if(wxWidgets_FIND_STYLE STREQUAL "win32")
   # Useful common wx libs needed by almost all components.
   set(wxWidgets_COMMON_LIBRARIES png tiff jpeg zlib regex expat)
-
-  # DEPRECATED: Use find_package(wxWidgets COMPONENTS mono) instead.
-  if(NOT wxWidgets_FIND_COMPONENTS)
-    if(wxWidgets_USE_MONOLITHIC)
-      set(wxWidgets_FIND_COMPONENTS mono)
-    else()
-      set(wxWidgets_FIND_COMPONENTS core base) # this is default
-    endif()
-  endif()
 
   # Add the common (usually required libs) unless
   # wxWidgets_EXCLUDE_COMMON_LIBRARIES has been set.
